@@ -8,3 +8,10 @@ class Order:
 
   def total(self):
     return sum(item.subtotal() for item in self.items)
+
+  def to_dict(self):
+    return {
+      "id": self.id,
+      "items": [item.to_dict() for item in self.items],
+      "total": self.total()
+    }
