@@ -1,4 +1,5 @@
-from flask inport Flask, jsonify
+from flask import Flask, jsonify
+
 from domain.product import Product
 from repository.product_repo import ProductRepository
 from repository.order_repo import OrderRepository
