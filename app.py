@@ -12,16 +12,15 @@ order_repo = OrderRepository()
 service = OrderService(product_repo, order_repo)
 
 def startup_data():
-  product_repo.add_product(Product(1, "Mug", 12.50))
-  product_repo.add_product(Product(2, "Scarf", 25.00))
-  product_repo.add_product(Product(3, "Notebook", 7.99))
+  product_repo.add(Product(1, "Mug", 12.50))
+  product_repo.add(Product(2, "Scarf", 25.00))
   
 startup_data()
 
 def startup_order():
   items = [
-    {"id": 1, "qty": 2},
-    {"id": 2, "qty": 1}
+    (1, 2),
+    (2, 1)
   ]
   service.create_order(items)
 
