@@ -25,3 +25,12 @@ def startup_order():
   service.create_order(items)
 
 startup_order()
+
+def get_order(order_id):
+  order = order_repo.get_order(order_id)
+  if order is None:
+    return jsonify({"error": "Order not found"}), 404
+  return jsonify(order.to_dict())
+
+if __name__ == "__main__":
+  app.run(debug=True)
