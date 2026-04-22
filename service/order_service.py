@@ -11,7 +11,10 @@ class OrderService:
         order = Order(self._next_order_id)
         self._next_order_id += 1
 
-        for product_id, quantity in items_data:
+        for item in items_data:
+            product_id = item["id"]
+            quantity = item["qty"]
+
             product = self.product_repo.get(product_id)
             if product is None:
                 raise ValueError(f"Product with ID {product_id} does not exist.")
