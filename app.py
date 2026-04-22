@@ -19,8 +19,8 @@ startup_data()
 
 def startup_order():
   items = [
-    (1, 2),
-    (2, 1)
+    {"id": 1, "qty": 2}
+    {"id": 2, "qty": 1}
   ]
   service.create_order(items)
 
@@ -29,11 +29,11 @@ startup_order()
 @app.route('/products')
 def get_products():
   products = product_repo.list_all()
-  return jsonify([p.to_dict() for p in product_repo.list_all()])
+  return jsonify([p.to_dict() for p in products])
 
 @app.route('/orders/<int:order_id>')
 def get_order(order_id):
-  order = order_repo.self(order_id)
+  order = order_repo.get(order_id)
   if order is None:
     return jsonify({"error": "Order not found"}), 404
   return jsonify(order.to_dict())
