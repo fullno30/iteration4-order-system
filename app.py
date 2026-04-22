@@ -11,12 +11,14 @@ product_repo = ProductRepository()
 order_repo = OrderRepository()
 service = OrderService(product_repo, order_repo)
 
+# Seed products
 def startup_data():
   product_repo.add(Product(1, "Mug", 12.50))
   product_repo.add(Product(2, "Scarf", 25.00))
   
 startup_data()
 
+# Seed order using dictionaries
 def startup_order():
   items = [
     {"id": 1, "qty": 2},
@@ -26,11 +28,13 @@ def startup_order():
 
 startup_order()
 
+# Get /products
 @app.route('/products')
 def get_products():
   products = product_repo.list_all()
   return jsonify([p.to_dict() for p in products])
-
+  
+# Get /orders/<id>
 @app.route('/orders/<int:order_id>')
 def get_order(order_id):
   order = order_repo.get(order_id)
