@@ -11,6 +11,17 @@ product_repo = ProductRepository()
 order_repo = OrderRepository()
 service = OrderService(product_repo, order_repo)
 
+@app.route('/products')
+def get_products():
+  return jsonify([p.to_dict() for p in product_repo.get_all()])
+
+@app.route('/orders/<int:order_id>')
+def get_order(order_id):
+  order = order_repo.get(order_id)
+  if order is None:
+    return jsonify({"error": "Order not found"}), 404
+  return jsonify(order.to_dict())
+
 def startup_data():
   product_repo.add(Product(1, "Mug", 12.50))
   product_repo.add(Product(2, "Scarf", 25.00))
