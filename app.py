@@ -37,7 +37,7 @@ def get_products():
 # Get /orders/<id>
 @app.route('/orders/<int:order_id>')
 def get_order(order_id):
-  order = order_repo.self(order_id)
+  order = order_repo.get(order_id)
   if order is None:
     return jsonify({"error": "Order not found"}), 404
   return jsonify(order.to_dict())
