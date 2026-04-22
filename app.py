@@ -19,7 +19,7 @@ startup_data()
 
 def startup_order():
   items = [
-    {"id": 1, "qty": 2}
+    {"id": 1, "qty": 2},
     {"id": 2, "qty": 1}
   ]
   service.create_order(items)
