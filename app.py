@@ -29,7 +29,7 @@ startup_order()
 @app.route('/products')
 def get_products():
   products = product_repo.list_all()
-  return jsonify([p.to_dict() for p in product_repo.get_all()])
+  return jsonify([p.to_dict() for p in product_repo.list_all()])
 
 @app.route('/orders/<int:order_id>')
 def get_order(order_id):
