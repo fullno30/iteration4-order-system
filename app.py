@@ -34,6 +34,27 @@ def get_products():
   products = product_repo.list_all()
   return jsonify([p.to_dict() for p in products])
   
+# POST /products
+@app.route('/products', methods=['POST'])
+def create_product():
+  data = request.getjson()
+  new_product = Product(data['id'], data['name'], data['price'])
+  product_repo.add(new_product)
+  return jsonify(new_product.to_dict()), 201
+
+# GET /orders
+@app.route('/orders')
+def get_all_order():
+  orders = order_repo.list_all()
+  return jsonify([o.to_dict() for o in orders])
+
+# POST /enter_orders
+@app.route('/enter_orders', methods=['POST'])
+def enter_order():
+  items = request.get_json()
+  new_order = service.create_order(items)
+  return jsonify(new_order.to_dict()), 201
+
 # Get /orders/<id>
 @app.route('/orders/<int:order_id>')
 def get_order(order_id):
