@@ -37,7 +37,7 @@ def get_products():
 # POST /products
 @app.route('/products', methods=['POST'])
 def create_product():
-  data = request.getjson()
+  data = request.get_json()
   new_product = Product(data['id'], data['name'], data['price'])
   product_repo.add(new_product)
   return jsonify(new_product.to_dict()), 201
